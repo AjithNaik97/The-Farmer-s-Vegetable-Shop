@@ -47,7 +47,7 @@ myrouter.get("/getupdateform/:name",function(req,res){
 })
 
 myrouter.post("/update",function(req,res){
-    connection.query("update vegetables set name=?,type=?,quantity=?,price=?",[req.body.name,req.body.type,req.body.quantity,req.body.price],function(err,result){
+    connection.query("update vegetables set name=?,type=?,quantity=?,price=?" where name=?,[req.body.name,req.body.type,req.body.quantity,req.body.price,req.body.name],function(err,result){
         if(err){
             res.status(500).send("Failed to update!");
         }else{
