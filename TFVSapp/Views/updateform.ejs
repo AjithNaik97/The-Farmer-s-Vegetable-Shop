@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function validateName(id,errid){
+                    var n=document.getElementById(id).value;
+                    var reg=/\d/;
+                    if(reg.test(n)){
+                        document.getElementById(errid).innerHTML="Name should not contain digit!!!";
+                        return false;
+                    }else{
+                        document.getElementById(errid).innerHTML="";
+                        return true;
+                    }
+                }
+        
+        function validateQuantity(id,errid){
+            var q=document.getElementById(id).value;
+            if(q!=0){
+                document.getElementById(errid).innerHTML=" ";
+                return true;
+            }else if(q==0){
+                document.getElementById(errid).innerHTML="Quantity should not be zero";
+                return false;
+            }
+        }
+
+        function validatePrice(id,errid){
+            var p=document.getElementById(id).value;
+            if(p!=0){
+                document.getElementById(errid).innerHTML=" ";
+                return true;
+            }else if(p==0){
+                document.getElementById(errid).innerHTML="Price should not be zero";
+                return false;
+            }
+        }
+
+
+
+        function validateData(){
+            var flag1=validateName("name","errname")
+            var flag2=validateQuantity("quantity","errquantity");
+            var flag3=validatePrice("price","errprice");
+            return flag1&&flag2&&flag3;
+        }
+    </script>
+</head>
+<body>
+    <form action="/update" method="post" onsubmit="return validateData()">
+        <table align="center">
+            <h3 align="center">Update Form</h3>
+            <tr>
+                <td>Vegetable Name</td>
+                <td><input type="text" id="name" name="name" value="<%= vegetable.name %>" readonly> </td>
+            </tr>
+            <tr>
+                <td>Vegetable Type</td>
+                <td><select id="type" name="type">
+                    <option value="leafy green">Leafy Green</option>
+                    <option value="root">Root</option>
+                    <option value="seed vegetable">Seed Vegetable</option>
+                    <option value="marrow">Marrow</option>
+                </select> </td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="text" id="quantity" name="quantity" value="<%= vegetable.quantity %>" required> </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" id="price" name="price" value="<%= vegetable.price%>" required> </td>
+            </tr>
+        </table>
+
+        <table align="center">
+        <tr>
+            <td> <form action="update" method="post"><input type="submit" id="btn" value="Update"></form><span></span></td>
+        </tr>
+    </table>
+
+    </form>
+    <span id="errname"></span><br>
+        <span id="errtype"></span><br>
+        <span id="errquantity"></span><br>
+        <span id="errprice"></span><br>
+</body>
+</html>
